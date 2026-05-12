@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark" data-density="comfortable">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SGO v2 — plataforma SaaS multi-tenant de gestão organizacional, construída pela Zello.">
+  <title>SGO v2 — Uma plataforma. Múltiplas organizações.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+:root {
+  --brand-50:  #FFF4F1;
+  --brand-100: #FFE3DB;
+  --brand-200: #FFC7B8;
+  --brand-300: #FFA089;
+  --brand-400: #FB7E62;
+  --brand-500: #F4694D;
+  --brand-600: #DE583E;
+  --brand-700: #BA4732;
+  --brand-800: #8E3729;
+  --brand-900: #61261F;
+
+  --accent-300: #74F2DD;
+  --accent-400: #43DFC7;
+  --accent-500: #1EC7AF;
+  --accent-600: #16A18E;
+  --accent-700: #127D6F;
+
+  --bg:            #0F0C14;
+  --bg-elevated:   #17131D;
+  --surface:       #1E1826;
+  --surface-2:     #231F2B;
+  --surface-3:     #2B2533;
+  --border:        #2E2838;
+  --border-strong: #3D3548;
+  --fg:            #F5F3F7;
+  --fg-soft:       #D9D2DE;
+  --fg-muted:      #8D8498;
+  --fg-dim:        #6D6676;
+  --primary:       var(--brand-500);
+  --primary-hover: var(--brand-400);
+  --primary-fg:    #1E1310;
+  --accent:        var(--accent-400);
+  --accent-fg:     #062C28;
+  --ring:          var(--brand-400);
+
+  --section-py: clamp(80px, 10vw, 144px);
+  --container-px: clamp(20px, 3vw, 48px);
+  --max-w: 1440px;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+}
+
+[data-theme="light"] {
+  --bg:            #FBFAFC;
+  --bg-elevated:   #FFFFFF;
+  --surface:       #FFFFFF;
+  --surface-2:     #F5F3F7;
+  --surface-3:     #EBE7EE;
+  --border:        #EBE7EE;
+  --border-strong: #D9D2DE;
+  --fg:            #231F2B;
+  --fg-soft:       #524C5B;
+  --fg-muted:      #6D6676;
+  --fg-dim:        #8D8498;
+  --primary:       var(--brand-500);
+  --primary-hover: var(--brand-600);
+  --primary-fg:    #FFFFFF;
+  --accent:        var(--accent-600);
+  --accent-fg:     #FFFFFF;
+  --ring:          var(--brand-500);
+}
+
+[data-density="compact"] { --section-py: clamp(56px, 7vw, 88px); }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 280ms ease, color 280ms ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--fg);
+}
+
+p { margin: 0; color: var(--fg-soft); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+::selection { background: var(--brand-500); color: var(--primary-fg); }
+
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+section.section {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent);
+}
+
+.section-title { font-size: clamp(32px, 4.4vw, 56px); letter-spacing: -0.025em; margin-top: 16px; max-width: 22ch; }
+.section-lede { font-size: clamp(16px, 1.4vw, 19px); line-height: 1.55; color: var(--fg-soft); max-width: 60ch; margin-top: 16px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  border: 1px solid transparent;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--primary); color: var(--primary-fg); }
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--fg); border-color: var(--border-strong); }
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--fg-muted); }
+
+.nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: calc(100% - 32px);
+  max-width: 1380px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 10px 20px;
+  background: color-mix(in oklab, var(--bg-elevated) 75%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 240ms ease;
+}
+.nav.scrolled { background: color-mix(in oklab, var(--bg-elevated) 92%, transparent); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+[data-theme="light"] .nav.scrolled { box-shadow: 0 12px 40px rgba(23,19,29,0.08); }
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-link { padding: 8px 12px; font-size: 13.5px; font-weight: 500; color: var(--fg-soft); border-radius: 8px; transition: all 160ms ease; }
+.nav-link:hover { color: var(--fg); background: var(--surface-2); }
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+.icon-btn {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg-soft);
+  transition: all 160ms ease;
+}
+.icon-btn:hover { background: var(--surface-2); color: var(--fg); }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+.logo-sgo {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 18px;
+  letter-spacing: -0.02em; color: var(--fg);
+}
+.logo-sgo-mark {
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-700));
+  box-shadow: 0 4px 14px -4px color-mix(in oklab, var(--brand-500) 60%, transparent);
+  position: relative;
+}
+.logo-sgo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+.logo-sgo-version {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--fg-muted);
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.zello-mark {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600; font-size: 12px;
+  color: var(--fg-muted);
+}
+.zello-mark span:last-child { color: var(--fg-soft); font-weight: 700; }
+
+.hero { padding-top: 140px; padding-bottom: 80px; position: relative; overflow: hidden; isolation: isolate; }
+.hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -10%; left: 50%;
+  transform: translateX(-50%);
+  width: 1200px; height: 800px;
+  background: radial-gradient(ellipse at center,
+    color-mix(in oklab, var(--brand-500) 28%, transparent) 0%,
+    color-mix(in oklab, var(--brand-700) 14%, transparent) 32%,
+    transparent 70%);
+  filter: blur(40px);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--fg) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--fg) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  border: 1px solid var(--border);
+  font-size: 13px; color: var(--fg-soft);
+  backdrop-filter: blur(8px);
+}
+.hero-badge-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  color: var(--accent);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+[data-theme="light"] .hero-badge-tag { color: var(--accent-700); background: var(--accent-300); }
+
+.hero h1 { font-size: clamp(44px, 7.5vw, 96px); letter-spacing: -0.04em; line-height: 0.98; margin-top: 28px; max-width: 16ch; }
+.hero h1 .accent-word {
+  background: linear-gradient(120deg, var(--brand-300) 0%, var(--brand-500) 50%, var(--accent-400) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; font-style: italic; font-weight: 600;
+}
+.hero-sub { font-size: clamp(17px, 1.6vw, 21px); color: var(--fg-soft); max-width: 60ch; margin-top: 28px; line-height: 1.55; }
+.hero-cta { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+
+.hero-mock-wrap {
+  margin-top: 80px; position: relative;
+  width: 100%; max-width: 1320px;
+  aspect-ratio: 16/9.5;
+  border-radius: var(--r-2xl);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.05) inset, 0 60px 120px -30px rgba(0,0,0,0.55), 0 30px 60px -15px rgba(244,105,77,0.15);
+}
+[data-theme="light"] .hero-mock-wrap { box-shadow: 0 60px 120px -30px rgba(23,19,29,0.20), 0 30px 60px -15px rgba(244,105,77,0.10); }
+.hero-mock-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 32px;
+  background: linear-gradient(to bottom, var(--surface-2), transparent);
+  z-index: 1; pointer-events: none;
+  border-bottom: 1px solid var(--border);
+}
+.hero-mock-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 32px;
+  display: flex; align-items: center;
+  padding: 0 14px; z-index: 2; gap: 6px;
+}
+.hero-mock-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-3); }
+.hero-mock-bar i:nth-child(1) { background: #ff5f57; }
+.hero-mock-bar i:nth-child(2) { background: #ffbd2e; }
+.hero-mock-bar i:nth-child(3) { background: #28c941; }
+.hero-mock-bar .url {
+  margin-left: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--fg-muted);
+  background: var(--bg);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; margin-top: 80px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  width: 100%; max-width: 1320px;
+}
+.hero-stat { background: var(--bg); padding: 28px 24px; text-align: left; }
+.hero-stat-num { font-family: 'Manrope', sans-serif; font-size: clamp(28px, 3.2vw, 40px); font-weight: 700; letter-spacing: -0.02em; color: var(--fg); line-height: 1; }
+.hero-stat-label { margin-top: 8px; font-size: 13px; color: var(--fg-muted); line-height: 1.4; }
+@media (max-width: 760px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
+
+.shift-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: stretch; margin-top: 64px; }
+.shift-side { display: flex; flex-direction: column; gap: 12px; padding: 28px; border-radius: var(--r-xl); border: 1px solid var(--border); background: var(--surface); position: relative; }
+.shift-side.v1 { opacity: 0.78; }
+.shift-side.v2 {
+  background: linear-gradient(180deg, var(--surface) 0%, color-mix(in oklab, var(--brand-500) 6%, var(--surface)) 100%);
+  border-color: color-mix(in oklab, var(--brand-500) 24%, var(--border));
+}
+.shift-side h3 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.shift-tag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; font-weight: 600; }
+.shift-tag.v1 { background: var(--surface-3); color: var(--fg-muted); }
+.shift-tag.v2 { background: color-mix(in oklab, var(--brand-500) 18%, transparent); color: var(--brand-400); }
+[data-theme="light"] .shift-tag.v2 { background: var(--brand-100); color: var(--brand-700); }
+.shift-row { display: grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 12px 0; border-top: 1px dashed var(--border); align-items: baseline; }
+.shift-row:first-of-type { border-top: 0; }
+.shift-row .label { font-size: 12px; color: var(--fg-muted); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+.shift-row .val { font-size: 14.5px; font-weight: 500; color: var(--fg); line-height: 1.4; }
+.shift-side.v1 .val { color: var(--fg-soft); text-decoration: line-through; text-decoration-color: var(--fg-dim); }
+.shift-arrow { display: grid; place-items: center; width: 64px; color: var(--brand-400); position: relative; }
+.shift-arrow svg { width: 40px; height: 40px; }
+@media (max-width: 880px) {
+  .shift-grid { grid-template-columns: 1fr; }
+  .shift-arrow { transform: rotate(90deg); width: auto; padding: 12px 0; }
+}
+
+.tenant-diagram { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 1000px) { .tenant-diagram { grid-template-columns: 1fr; } }
+.tenant-stage {
+  position: relative; padding: 40px;
+  border-radius: var(--r-2xl);
+  background:
+    radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--brand-500) 16%, transparent), transparent 60%),
+    radial-gradient(circle at 80% 80%, color-mix(in oklab, var(--accent-500) 14%, transparent), transparent 60%),
+    var(--surface);
+  border: 1px solid var(--border);
+  min-height: 520px;
+  display: flex; flex-direction: column; gap: 14px; justify-content: center;
+}
+.tenant-level {
+  position: relative; padding: 18px 22px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer;
+  transition: all 220ms cubic-bezier(.2,.8,.2,1);
+  text-align: left; width: 100%; font-family: inherit; color: var(--fg);
+}
+.tenant-level::before {
+  content: ''; position: absolute;
+  left: -1px; top: 50%; transform: translateY(-50%);
+  width: 3px; height: 0;
+  border-radius: 0 3px 3px 0;
+  background: var(--primary);
+  transition: height 220ms ease;
+}
+.tenant-level.active {
+  border-color: color-mix(in oklab, var(--brand-500) 60%, var(--border));
+  background: color-mix(in oklab, var(--brand-500) 6%, var(--bg-elevated));
+  transform: translateX(4px);
+  box-shadow: 0 8px 24px -8px color-mix(in oklab, var(--brand-500) 40%, transparent);
+}
+.tenant-level.active::before { height: 60%; }
+.tenant-level.l-2 { margin-left: 32px; }
+.tenant-level.l-3 { margin-left: 64px; }
+.tenant-level.l-4 { margin-left: 96px; }
+.tenant-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: var(--surface-2); color: var(--fg-soft);
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-size: 14px;
+}
+.tenant-level.active .tenant-icon {
+  background: color-mix(in oklab, var(--brand-500) 22%, transparent);
+  color: var(--brand-400);
+}
+.tenant-meta { flex: 1; min-width: 0; }
+.tenant-meta-label { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.tenant-meta-name { font-size: 15px; font-weight: 600; color: var(--fg); margin-top: 2px; }
+.tenant-count {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--fg-muted);
+  padding: 3px 8px;
+  background: var(--surface-2);
+  border-radius: 4px;
+}
+.tenant-detail { position: relative; min-height: 360px; }
+.tenant-detail h3 { font-size: 28px; letter-spacing: -0.02em; }
+.tenant-detail-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--brand-400); margin-bottom: 8px; letter-spacing: 0.04em; }
+.tenant-detail p { margin-top: 16px; line-height: 1.6; }
+.tenant-detail ul { list-style: none; padding: 0; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+.tenant-detail li { font-size: 14px; color: var(--fg-soft); display: flex; gap: 12px; align-items: baseline; }
+.tenant-detail li::before {
+  content: ''; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--brand-400);
+  flex-shrink: 0; transform: translateY(7px);
+}
+.tenant-iso {
+  margin-top: 28px;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--fg-soft);
+}
+.tenant-iso .key { color: var(--accent); }
+
+.rbac-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; margin-top: 64px; align-items: center; }
+@media (max-width: 1000px) { .rbac-grid { grid-template-columns: 1fr; } }
+.rbac-old, .rbac-new { border-radius: var(--r-xl); border: 1px solid var(--border); padding: 32px; background: var(--surface); }
+.rbac-old { opacity: 0.85; }
+.rbac-old h4, .rbac-new h4 { font-size: 18px; display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.rbac-old-roles { display: flex; flex-direction: column; gap: 12px; }
+.rbac-role-fixed {
+  padding: 14px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13.5px; color: var(--fg-soft);
+}
+.rbac-role-fixed .name { font-weight: 600; color: var(--fg); }
+.rbac-role-fixed .perms { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-muted); }
+
+.rbac-matrix {
+  display: grid; grid-template-columns: 160px repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden; border: 1px solid var(--border);
+}
+.rbac-cell, .rbac-head, .rbac-row-label { background: var(--surface); padding: 10px 12px; font-size: 12px; }
+.rbac-head, .rbac-row-label {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: var(--surface-2);
+}
+.rbac-row-label { text-transform: none; letter-spacing: 0; font-family: 'Inter'; font-size: 13px; color: var(--fg); }
+.rbac-cell { display: grid; place-items: center; }
+.rbac-cell .dot { width: 14px; height: 14px; border-radius: 4px; background: var(--surface-3); }
+.rbac-cell.on .dot { background: var(--brand-500); box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand-500) 16%, transparent); }
+.rbac-cell.partial .dot { background: var(--accent-500); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-500) 16%, transparent); }
+
+.features-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.feature-card {
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 220ms ease;
+  display: flex; flex-direction: column;
+  gap: 16px; min-height: 320px;
+}
+.feature-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.feature-card.col-3 { grid-column: span 3; }
+.feature-card.col-2 { grid-column: span 2; }
+.feature-card.col-4 { grid-column: span 4; }
+.feature-card.col-6 { grid-column: span 6; min-height: 280px; }
+.feature-card h3 { font-size: 22px; letter-spacing: -0.02em; }
+.feature-card p { font-size: 14.5px; line-height: 1.55; color: var(--fg-soft); }
+.feature-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-400);
+  font-weight: 600;
+}
+.feature-visual {
+  flex: 1; border-radius: var(--r-md);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--surface-2) 60%, transparent) 0%, var(--bg) 100%);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  min-height: 140px;
+}
+@media (max-width: 1000px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-card.col-3, .feature-card.col-2, .feature-card.col-4, .feature-card.col-6 { grid-column: span 2; }
+}
+@media (max-width: 600px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.col-3, .feature-card.col-2, .feature-card.col-4, .feature-card.col-6 { grid-column: span 1; }
+}
+
+.mini-chat { position: absolute; inset: 16px; display: grid; grid-template-columns: 110px 1fr; gap: 8px; }
+.mini-chat-side { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 10px 8px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.mini-chat-sec { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 6px 2px; }
+.mini-chat-ch { display: flex; align-items: center; gap: 6px; padding: 5px 7px; border-radius: 5px; font-size: 11px; color: var(--fg-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-chat-ch.act { background: color-mix(in oklab, var(--brand-500) 12%, transparent); color: var(--fg); }
+.mini-chat-ch .hash { color: var(--fg-muted); font-family: 'JetBrains Mono', monospace; }
+.mini-chat-ch .dot { margin-left: auto; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-500) 25%, transparent); }
+.av-mini { width: 16px; height: 16px; border-radius: 50%; display: grid; place-items: center; color: white; font-weight: 700; font-size: 8px; flex-shrink: 0; }
+.av-mini.a1 { background: var(--brand-500); }
+.av-mini.a2 { background: var(--accent-500); }
+.av-mini.a3 { background: #87C7FF; }
+.mini-chat-main { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; display: grid; grid-template-rows: auto 1fr auto; min-width: 0; overflow: hidden; }
+.mini-chat-h { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 12px; }
+.mini-chat-h .hash { color: var(--fg-muted); font-family: 'JetBrains Mono', monospace; }
+.mini-chat-h .ch-name { font-weight: 700; color: var(--fg); font-family: 'Manrope', sans-serif; }
+.mini-chat-h .ch-scope { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--fg-muted); letter-spacing: 0.04em; }
+.mini-msgs { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; overflow: hidden; }
+.mini-msg { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: flex-start; }
+.mini-msg-h { display: flex; align-items: baseline; gap: 6px; font-size: 11px; }
+.mini-msg-h b { color: var(--fg); font-weight: 600; }
+.mini-msg-h span { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--fg-muted); }
+.mini-msg-b { font-size: 11px; color: var(--fg-soft); line-height: 1.4; margin-top: 1px; }
+.mini-chat-input { padding: 8px 12px; border-top: 1px solid var(--border); background: var(--surface); font-size: 11px; color: var(--fg-muted); }
+
+.mini-chart { position: absolute; inset: 16px; display: flex; flex-direction: column; gap: 8px; justify-content: flex-end; }
+.mini-chart-row { display: flex; align-items: flex-end; gap: 4px; height: 28px; }
+.mini-chart-bar { flex: 1; background: linear-gradient(180deg, var(--brand-400), var(--brand-700)); border-radius: 2px; min-height: 4px; }
+.mini-chart-line { height: 1px; background: var(--border); }
+
+.mini-audit { position: absolute; inset: 16px; display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; overflow: hidden; }
+.mini-audit-row { display: flex; gap: 8px; align-items: center; padding: 4px 6px; border-radius: 4px; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--fg-soft); }
+.mini-audit-row .who { color: var(--brand-400); font-weight: 600; }
+.mini-audit-row .when { color: var(--fg-muted); margin-left: auto; }
+
+.stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+@media (max-width: 900px) { .stack-grid { grid-template-columns: 1fr; } }
+.stack-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.stack-pill { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; font-weight: 500; color: var(--fg-soft); display: inline-flex; align-items: center; gap: 8px; transition: all 160ms ease; }
+.stack-pill:hover { border-color: var(--border-strong); color: var(--fg); transform: translateY(-1px); }
+.stack-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-500); }
+.stack-pill[data-cat="front"] .dot { background: var(--brand-400); }
+.stack-pill[data-cat="back"] .dot { background: var(--accent-500); }
+.stack-pill[data-cat="data"] .dot { background: #50AAFF; }
+.stack-pill[data-cat="ai"] .dot { background: #C084FC; }
+.stack-section-h { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); margin: 24px 0 12px; display: flex; align-items: center; gap: 12px; }
+.stack-section-h::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.stack-section-h:first-child { margin-top: 0; }
+
+.code-window { border-radius: var(--r-xl); border: 1px solid var(--border); background: var(--bg-elevated); overflow: hidden; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; }
+.code-head { padding: 12px 16px; background: var(--surface-2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--fg-muted); }
+.code-head .dots { display: flex; gap: 4px; }
+.code-head .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-3); }
+.code-body { padding: 20px 22px; overflow-x: auto; }
+.code-body .ln { display: block; color: var(--fg); white-space: pre; }
+.code-body .ln.dim { color: var(--fg-muted); }
+.tk-kw { color: #FB7E62; }
+.tk-fn { color: #74F2DD; }
+.tk-st { color: #87C7FF; }
+.tk-co { color: var(--fg-muted); font-style: italic; }
+.tk-ty { color: #C084FC; }
+.tk-pr { color: #FFD055; }
+
+.mcp-callout { margin-top: 24px; padding: 20px 24px; border-radius: var(--r-lg); border: 1px solid color-mix(in oklab, var(--accent-500) 30%, var(--border)); background: linear-gradient(135deg, color-mix(in oklab, var(--accent-500) 8%, transparent), transparent 50%), var(--surface); display: flex; gap: 16px; align-items: center; }
+.mcp-icon { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; background: color-mix(in oklab, var(--accent-500) 18%, transparent); color: var(--accent); flex-shrink: 0; }
+.mcp-callout h4 { font-size: 16px; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.mcp-callout p { font-size: 13.5px; line-height: 1.5; }
+.mcp-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: color-mix(in oklab, var(--accent-500) 18%, transparent); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+
+.roadmap-track { margin-top: 56px; position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.roadmap-track::before { content: ''; position: absolute; top: 28px; left: 16px; right: 16px; height: 1px; background: repeating-linear-gradient(to right, var(--border) 0 8px, transparent 8px 14px); }
+.roadmap-step { position: relative; padding-top: 64px; }
+.roadmap-step::before { content: ''; position: absolute; top: 22px; left: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface-2); border: 2px solid var(--border-strong); }
+.roadmap-step.done::before { background: color-mix(in oklab, var(--brand-500) 70%, var(--fg-dim)); border-color: color-mix(in oklab, var(--brand-500) 70%, var(--fg-dim)); }
+.roadmap-step.now::before { background: var(--accent-500); border-color: var(--accent-500); box-shadow: 0 0 0 5px color-mix(in oklab, var(--accent-500) 18%, transparent); animation: pulseDot 2.4s ease-in-out infinite; }
+.roadmap-step.next::before { background: var(--bg); border-color: var(--brand-500); }
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 5px color-mix(in oklab, var(--brand-500) 18%, transparent); }
+  50%      { box-shadow: 0 0 0 8px color-mix(in oklab, var(--brand-500) 10%, transparent); }
+}
+.roadmap-quarter { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); margin-bottom: 6px; }
+.roadmap-step h4 { font-size: 17px; letter-spacing: -0.01em; }
+.roadmap-step p { font-size: 13.5px; margin-top: 8px; line-height: 1.5; }
+.roadmap-step.done .roadmap-quarter { color: var(--fg-muted); }
+.roadmap-step.now .roadmap-quarter { color: var(--accent); }
+.roadmap-step.done h4 { color: var(--fg-soft); }
+.roadmap-step.done p { color: var(--fg-muted); }
+@media (max-width: 1100px) { .roadmap-track { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { .roadmap-track { grid-template-columns: repeat(2, 1fr); } .roadmap-track::before { display: none; } }
+@media (max-width: 480px) { .roadmap-track { grid-template-columns: 1fr; } }
+
+.cta {
+  text-align: center; padding: 80px 24px;
+  border-radius: var(--r-2xl);
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 30% 0%, color-mix(in oklab, var(--brand-500) 22%, transparent), transparent 50%),
+    radial-gradient(ellipse at 80% 100%, color-mix(in oklab, var(--accent-500) 14%, transparent), transparent 60%),
+    var(--surface);
+  position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--fg) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--fg) 4%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; }
+.cta h2 { font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.03em; max-width: 18ch; margin: 0 auto; }
+.cta p { font-size: 18px; margin-top: 20px; color: var(--fg-soft); max-width: 50ch; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 12px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+
+.footer { margin-top: 80px; padding: 48px 0 32px; border-top: 1px solid var(--border); }
+.footer-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex-wrap: wrap; }
+.footer-col h5 { font-size: 11px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; color: var(--fg-muted); margin-bottom: 12px; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-col a { font-size: 14px; color: var(--fg-soft); transition: color 160ms; }
+.footer-col a:hover { color: var(--fg); }
+.footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--fg-muted); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+/* DevStory */
+.ds-stats { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ds-stat { padding: 24px 22px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--r-xl); position: relative; overflow: hidden; }
+.ds-stat::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--brand-500), var(--accent-500)); opacity: 0.5; }
+.ds-stat--breakdown { justify-content: flex-start; gap: 14px; }
+.ds-stat-rows { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.ds-stat-rows li { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px dashed var(--border); }
+.ds-stat-rows li:last-child { border-bottom: 0; padding-bottom: 0; }
+.ds-stat-tag { width: 26px; height: 22px; display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 11px; color: var(--brand-400); background: color-mix(in oklab, var(--brand-500) 14%, transparent); border: 1px solid color-mix(in oklab, var(--brand-500) 30%, transparent); border-radius: 6px; }
+.ds-stat-count { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 14px; color: var(--fg); }
+.ds-stat-time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-muted); }
+.ds-stat-v { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: clamp(40px, 4vw, 56px); letter-spacing: -0.03em; line-height: 1; color: var(--fg); }
+.ds-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 14px; }
+.ds-stat-sub { font-size: 13px; color: var(--fg-soft); margin-top: 6px; line-height: 1.4; }
+@media (max-width: 960px) { .ds-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ds-stats { grid-template-columns: 1fr; } }
+
+.ds-grid { margin-top: 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+@media (max-width: 1000px) { .ds-grid { grid-template-columns: 1fr; } }
+.ds-flow { padding: 28px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--r-xl); }
+.ds-flow-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
+.ds-flow-h h3 { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -0.02em; color: var(--fg); margin-top: 8px; }
+.ds-flow-list { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-direction: column; gap: 18px; position: relative; }
+.ds-flow-list::before { content: ''; position: absolute; left: 14px; top: 30px; bottom: 30px; width: 1px; background: linear-gradient(180deg, color-mix(in oklab, var(--brand-500) 40%, transparent), color-mix(in oklab, var(--accent-500) 30%, transparent)); }
+.ds-flow-step { display: grid; grid-template-columns: 30px 1fr; gap: 14px; position: relative; z-index: 1; }
+.ds-flow-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 1px solid color-mix(in oklab, var(--brand-500) 35%, transparent); color: var(--brand-400); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700; display: grid; place-items: center; }
+.ds-flow-k { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+.ds-flow-t { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 16px; color: var(--fg); margin-top: 2px; }
+.ds-flow-step p { font-size: 13.5px; line-height: 1.55; color: var(--fg-soft); margin-top: 4px; }
+.ds-flow-foot { margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border); display: flex; flex-wrap: wrap; gap: 8px; font-size: 11.5px; color: var(--fg-muted); }
+.ds-flow-foot .sep { color: var(--fg-dim); }
+.ds-voices { display: flex; flex-direction: column; gap: 16px; }
+.ds-quote { position: relative; padding: 24px 24px 22px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--r-xl); margin: 0; overflow: hidden; }
+.ds-quote.tone-a::before, .ds-quote.tone-b::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 2px; }
+.ds-quote.tone-a::before { background: var(--brand-500); }
+.ds-quote.tone-b::before { background: var(--accent-500); }
+.ds-qmark { color: var(--brand-500); opacity: 0.35; margin-bottom: 6px; }
+.ds-quote.tone-b .ds-qmark { color: var(--accent-500); }
+.ds-quote blockquote { margin: 0; font-family: 'Manrope', sans-serif; font-size: 15px; line-height: 1.6; color: var(--fg); font-weight: 500; }
+.ds-quote blockquote p { margin: 0; }
+.ds-quote blockquote p + p { margin-top: 12px; color: var(--fg-soft); font-weight: 400; }
+.ds-quote figcaption { display: flex; align-items: center; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border); }
+.ds-quote figcaption b { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 14px; color: var(--fg); display: block; }
+.ds-role { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--fg-muted); letter-spacing: 0.04em; }
+.ds-av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+.ds-av.av-a { background: linear-gradient(135deg, var(--brand-500), var(--brand-700)); }
+.ds-av.av-b { background: linear-gradient(135deg, #1EC7AF, #127D6F); }
+
+/* MockTenants */
+.mock-tenants { position: absolute; inset: 32px 0 0; padding: 52px 36px 28px; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; font-family: 'Inter', sans-serif; }
+.mt-pageh { display: flex; align-items: center; gap: 12px; }
+.mt-pageh .crumb { font-size: 11px; color: var(--fg-muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+.mt-pageh h2 { font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700; color: var(--fg); }
+.mt-pageh .right { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+.mt-pageh .chip { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 4px; background: var(--surface-2); color: var(--fg-muted); border: 1px solid var(--border); }
+.mt-pageh .chip.acc { color: var(--accent); background: color-mix(in oklab, var(--accent-500) 10%, transparent); border-color: color-mix(in oklab, var(--accent-500) 22%, transparent); }
+.mt-pageh .chip.acc::before { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; background: var(--accent); margin-right: 5px; vertical-align: middle; box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent-500) 25%, transparent); }
+.mt-orgs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; min-height: 0; }
+.mt-org { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+.mt-org-head { display: flex; align-items: center; gap: 10px; position: relative; }
+.mt-org-logo { width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; color: white; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 11px; flex-shrink: 0; }
+.mt-org-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 14px; color: var(--fg); }
+.mt-org-meta { font-size: 10.5px; font-family: 'JetBrains Mono', monospace; color: var(--fg-muted); letter-spacing: 0.04em; margin-top: 1px; }
+.mt-role-pill { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 3px 7px; border-radius: 4px; letter-spacing: 0.06em; font-weight: 600; }
+.mt-role-pill.ADMIN { color: var(--brand-400); background: color-mix(in oklab, var(--brand-500) 16%, transparent); }
+.mt-role-pill.MEMBER { color: var(--accent); background: color-mix(in oklab, var(--accent-500) 14%, transparent); }
+.mt-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.mt-stat { padding: 8px 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; }
+.mt-stat .v { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 16px; color: var(--fg); line-height: 1; }
+.mt-stat .l { font-size: 9.5px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+.mt-clihead { display: flex; align-items: center; justify-content: space-between; font-size: 9.5px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'JetBrains Mono', monospace; padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 2px; }
+.mt-clihead .more { color: var(--fg-soft); }
+.mt-clilist { display: flex; flex-direction: column; gap: 4px; flex: 1; min-height: 0; }
+.mt-cli { display: grid; grid-template-columns: 24px 1fr auto auto; gap: 10px; align-items: center; padding: 6px 8px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); }
+.mt-cli-badge { width: 24px; height: 24px; border-radius: 5px; background: var(--surface-2); color: var(--fg-soft); font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 9px; display: grid; place-items: center; }
+.mt-cli-name { font-size: 11.5px; font-weight: 500; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mt-cli-mem { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--fg-muted); }
+.mt-cli-on { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 1.5px 5px; border-radius: 999px; background: var(--surface-2); color: var(--fg-muted); min-width: 36px; text-align: center; }
+.mt-cli-on.live { color: var(--accent); background: color-mix(in oklab, var(--accent-500) 12%, transparent); }
+.mt-cli-on.live::before { content:''; display:inline-block; width:5px; height:5px; border-radius:50%; background: var(--accent); margin-right: 4px; vertical-align: middle; }
+.mt-strip { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--fg-muted); }
+.mt-strip .v { color: var(--fg); }
+.mt-strip .k { color: var(--fg-muted); }
+.mt-strip .sep { color: var(--fg-dim); margin: 0 4px; }
+.mt-strip .right { margin-left: auto; color: var(--fg-soft); }
+.mt-strip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-500); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-500) 22%, transparent); animation: mt-pulse 2s ease-in-out infinite; }
+@keyframes mt-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+@media (max-width: 760px) { .mock-tenants { padding: 52px 16px 16px; } .mt-orgs { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+function LogoSGO({ withVersion = true }) {
+  return (
+    <a href="#top" className="logo-sgo" aria-label="SGO">
+      <span className="logo-sgo-mark" aria-hidden="true"></span>
+      <span>SGO</span>
+      {withVersion && <span className="logo-sgo-version">v2</span>}
+    </a>
+  );
+}
+
+function ZelloMark() {
+  return (
+    <span className="zello-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+        <path d="M8 12h8M12 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+      <span>por</span><span>Zello</span>
+    </span>
+  );
+}
+
+function Nav({ theme, setTheme }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+      <LogoSGO />
+      <div className="nav-links">
+        <a className="nav-link" href="#shift">A virada</a>
+        <a className="nav-link" href="#tenancy">Multi-tenant</a>
+        <a className="nav-link" href="#permissions">Permissões</a>
+        <a className="nav-link" href="#features">Funcionalidades</a>
+        <a className="nav-link" href="#stack">Stack</a>
+        <a className="nav-link" href="#roadmap">Roadmap</a>
+      </div>
+      <div className="nav-actions">
+        <button className="icon-btn" aria-label="Alternar tema" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+          {theme === 'dark' ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+          )}
+        </button>
+        <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary" style={{ height: 36, padding: '0 14px', fontSize: 13 }}>
+          Vamos lá?
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function MockTenants() {
+  const orgs = [
+    { id: 'ops', name: 'Diretoria de Operação', short: 'DOP', code: 'OP', role: 'ADMIN',
+      stats: { clients: 4, members: 38, projects: 17 },
+      grad: 'linear-gradient(135deg, #F4694D, #BA4732)',
+      clients: [
+        { code: 'ACM', name: 'Acme Corp', members: 14, on: 3 },
+        { code: 'GBX', name: 'Globex', members: 9, on: 1 },
+        { code: 'INI', name: 'Initech', members: 6, on: 0 },
+        { code: 'UMB', name: 'Umbrella', members: 9, on: 2 },
+      ],
+    },
+    { id: 'prd', name: 'Diretoria de Produtos', short: 'DPR', code: 'PR', role: 'MEMBER',
+      stats: { clients: 3, members: 22, projects: 9 },
+      grad: 'linear-gradient(135deg, #1EC7AF, #127D6F)',
+      clients: [
+        { code: 'VTX', name: 'Vertex', members: 11, on: 4 },
+        { code: 'LMN', name: 'Lumen Labs', members: 7, on: 2 },
+        { code: 'NMB', name: 'Nimbus', members: 4, on: 0 },
+      ],
+    },
+  ];
+  return (
+    <div className="mock-tenants">
+      <div className="mt-pageh">
+        <span className="crumb">ZELLO</span>
+        <span style={{color:'var(--fg-dim)'}}>›</span>
+        <h2>Suas organizações</h2>
+        <div className="right">
+          <span className="chip acc">2 ativas</span>
+          <span className="chip">＋ Nova</span>
+        </div>
+      </div>
+      <div className="mt-orgs">
+        {orgs.map(o => (
+          <div className="mt-org" key={o.id}>
+            <div className="mt-org-head">
+              <span className="mt-org-logo" style={{background: o.grad}}>{o.code}</span>
+              <div style={{minWidth: 0}}>
+                <div className="mt-org-name">{o.name}</div>
+                <div className="mt-org-meta">DIRETORIA · {o.short}</div>
+              </div>
+              <span className={`mt-role-pill ${o.role}`}>{o.role}</span>
+            </div>
+            <div className="mt-stats">
+              <div className="mt-stat"><div className="v">{o.stats.clients}</div><div className="l">Clientes</div></div>
+              <div className="mt-stat"><div className="v">{o.stats.members}</div><div className="l">Membros</div></div>
+              <div className="mt-stat"><div className="v">{o.stats.projects}</div><div className="l">Projetos</div></div>
+            </div>
+            <div className="mt-clihead">
+              <span>Clientes</span>
+              <span className="more">ver todos →</span>
+            </div>
+            <div className="mt-clilist">
+              {o.clients.map(c => (
+                <div className="mt-cli" key={c.code}>
+                  <span className="mt-cli-badge">{c.code}</span>
+                  <span className="mt-cli-name">{c.name}</span>
+                  <span className="mt-cli-mem">{c.members} membros</span>
+                  <span className={`mt-cli-on ${c.on > 0 ? 'live' : ''}`}>{c.on > 0 ? `${c.on} on` : '—'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-strip">
+        <span className="dot"></span>
+        <span>isolamento por <span className="v">orgId</span></span>
+        <span className="sep">·</span>
+        <span className="k">org_ops_zello</span>
+        <span className="sep">·</span>
+        <span className="k">org_prod_zello</span>
+        <span className="right">cada diretoria, seus clientes, seus membros, sua auditoria</span>
+      </div>
+    </div>
+  );
+}
+
+function HeroMockup() {
+  return (
+    <div className="hero-mock-wrap reveal">
+      <div className="hero-mock-bar">
+        <i></i><i></i><i></i>
+        <span className="url">app.sgo.zello.tec.br/org/zello/clients</span>
+      </div>
+      <MockTenants />
+    </div>
+  );
+}
+
+function HeroStats() {
+  const stats = [
+    { num: '3', label: 'aplicações em monorepo (front · back · MCP)' },
+    { num: '17+', label: 'features no front, 20+ módulos no back' },
+    { num: '∞', label: 'perfis de permissão (antes: 3 fixos)' },
+    { num: '100%', label: 'TypeScript, do banco ao botão' },
+  ];
+  return (
+    <div className="hero-stats reveal">
+      {stats.map((s, i) => (
+        <div className="hero-stat" key={i}>
+          <div className="hero-stat-num">{s.num}</div>
+          <div className="hero-stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero" id="top">
+      <div className="hero-bg" aria-hidden="true"></div>
+      <div className="container">
+        <div className="hero-inner">
+          <div className="hero-badge reveal in">
+            <span className="hero-badge-tag">v2 · 2026</span>
+            <span>Reconstruída do zero como produto SaaS</span>
+          </div>
+          <h1 className="reveal in">
+            Uma plataforma. Múltiplas organizações.<br/>
+            <span className="accent-word">Operação no controle.</span>
+          </h1>
+          <p className="hero-sub reveal in">
+            O SGO deixou de ser uma ferramenta operacional interna para se tornar uma plataforma multi-tenant, escrita 100&nbsp;% em TypeScript, com permissões granulares, auditoria nativa e operação em tempo real.
+          </p>
+          <div className="hero-cta reveal in">
+            <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary">
+              Vamos lá?
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#tenancy" className="btn btn-ghost">Conhecer a arquitetura</a>
+          </div>
+          <HeroMockup />
+          <HeroStats />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Shift() {
+  const rows = [
+    { k: 'Frontend', v1: 'Flutter (FlutterFlow)', v2: 'React 18 + Vite' },
+    { k: 'Backend',  v1: 'Mulesoft (low-code)', v2: 'NestJS 10' },
+    { k: 'Banco',    v1: 'SQL relacional', v2: 'MongoDB 8' },
+    { k: 'Auth',     v1: 'Firebase Auth', v2: 'OAuth Google + JWT' },
+    { k: 'Tenancy',  v1: 'Single-tenant', v2: 'Multi-tenant (Org → Client)' },
+    { k: 'Permissões', v1: '3 perfis fixos', v2: 'RBAC granular + perfis' },
+    { k: 'Auditoria', v1: 'Inexistente', v2: 'Automática em toda operação' },
+    { k: 'Realtime', v1: 'Inexistente', v2: 'WebSockets (socket.io)' },
+    { k: 'Testes',   v1: 'Ausentes', v2: 'Vitest, Jest, Testing Library' },
+  ];
+  return (
+    <section className="section" id="shift">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">02 · A virada</span>
+          <h2 className="section-title">Reconstruímos do zero — sem nostalgia.</h2>
+          <p className="section-lede">
+            A v1 fez seu papel. Mas FlutterFlow gerando código, Mulesoft e SQL engessado tinham teto. A v2 não é refatoração: é uma plataforma nova, escrita por nosso time.
+          </p>
+        </div>
+        <div className="shift-grid reveal">
+          <div className="shift-side v1">
+            <h3><span className="shift-tag v1">SGO-Zello v1</span></h3>
+            {rows.map((r, i) => (
+              <div className="shift-row" key={i}>
+                <span className="label">{r.k}</span>
+                <span className="val">{r.v1}</span>
+              </div>
+            ))}
+          </div>
+          <div className="shift-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </div>
+          <div className="shift-side v2">
+            <h3><span className="shift-tag v2">SGO v2 — 2026</span></h3>
+            {rows.map((r, i) => (
+              <div className="shift-row" key={i}>
+                <span className="label">{r.k}</span>
+                <span className="val">{r.v2}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MultiTenancy() {
+  const [active, setActive] = useState(1);
+  const levels = [
+    { l: 1, meta: 'DIRETORIA', name: 'Organization', count: '1 org',
+      detail: { eyebrow: 'Org → tenant raiz', title: 'A diretoria, no topo.',
+        copy: 'A organização é o tenant raiz. Aqui ficam os admins globais, os perfis customizados e a relação com clientes. É o escopo que a Zello opera.',
+        bullets: ['OrgRole: ADMIN | MEMBER', 'CustomProfiles ilimitados', 'Vê todos os clientes vinculados', 'Audit log consolidado'],
+        iso: { key: 'orgId', val: 'org_zello' } } },
+    { l: 2, meta: 'TENANT', name: 'Client', count: 'N clientes',
+      detail: { eyebrow: 'Client → tenant isolado', title: 'Cada cliente, um mundo.',
+        copy: 'Antes, "cliente" era apenas um cadastro. Hoje é um tenant isolado: dados, membros, times e auditoria próprios. Toda entidade carrega clientId — isolamento garantido em nível de dado.',
+        bullets: ['ClientRole: ADMIN | MEMBER', 'Membros vinculados ao escopo do cliente', 'Indexação por orgId + clientId', 'Rotas escopadas em /c/*'],
+        iso: { key: 'clientId', val: 'cli_acme_corp' } } },
+    { l: 3, meta: 'EQUIPE', name: 'Team', count: 'N times',
+      detail: { eyebrow: 'Team → squad operacional', title: 'Times reais, com papéis reais.',
+        copy: 'O antigo "Squad" virou Team — agora pertence a um cliente específico, com hierarquia de papéis e composição clara.',
+        bullets: ['Coordenador, Co-coordenador, Tech Leader, Membro', 'Vínculo via TeamMember (uma pessoa, vários times)', 'Custos do time agregáveis', 'Permissões podem propagar do team'],
+        iso: { key: 'teamId', val: 'team_platform' } } },
+    { l: 4, meta: 'PROJETO', name: 'Project', count: 'N projetos',
+      detail: { eyebrow: 'Project → trabalho rastreável', title: 'Onde o trabalho acontece.',
+        copy: 'Cada projeto tem execuções, sprints, metas, custos, documentos e dashboards próprios — tudo amarrado no escopo do cliente, com auditoria automática.',
+        bullets: ['Execuções e alocações rastreáveis', 'Sprints, metas e custos por time', 'Métricas próprias por projeto', 'Documentação anexa e calendar próprio'],
+        iso: { key: 'projectId', val: 'proj_sgo_v2' } } },
+  ];
+  const cur = levels.find(x => x.l === active);
+  return (
+    <section className="section" id="tenancy">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">03 · Multi-tenant</span>
+          <h2 className="section-title">De ferramenta interna<br/>a plataforma SaaS.</h2>
+          <p className="section-lede">
+            A mudança conceitual mais profunda da v2: o que era "cadastro de cliente" virou um tenant isolado. Toda entidade carrega <span className="mono" style={{color:'var(--accent)'}}>orgId</span> e <span className="mono" style={{color:'var(--accent)'}}>clientId</span>.
+          </p>
+        </div>
+        <div className="tenant-diagram reveal">
+          <div className="tenant-stage" role="tablist">
+            {levels.map(lv => (
+              <button key={lv.l} role="tab" aria-selected={active === lv.l}
+                className={`tenant-level l-${lv.l} ${active === lv.l ? 'active' : ''}`}
+                onMouseEnter={() => setActive(lv.l)} onFocus={() => setActive(lv.l)} onClick={() => setActive(lv.l)}>
+                <span className="tenant-icon">{lv.l}</span>
+                <span className="tenant-meta">
+                  <span className="tenant-meta-label">{lv.meta}</span>
+                  <span className="tenant-meta-name">{lv.name}</span>
+                </span>
+                <span className="tenant-count">{lv.count}</span>
+              </button>
+            ))}
+          </div>
+          <div className="tenant-detail">
+            <div className="tenant-detail-eyebrow mono">{cur.detail.eyebrow}</div>
+            <h3>{cur.detail.title}</h3>
+            <p>{cur.detail.copy}</p>
+            <ul>{cur.detail.bullets.map((b, i) => (<li key={i}>{b}</li>))}</ul>
+            <div className="tenant-iso">
+              <span className="key">{cur.detail.iso.key}</span>
+              <span style={{color: 'var(--fg-muted)'}}>: </span>
+              <span>"{cur.detail.iso.val}"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RBAC() {
+  const features = ['execucoes.update', 'projects.edit', 'teams.manage', 'audit.view', 'execucoes.create', 'org.clients.create'];
+  const profiles = [
+    { name: 'Operações', perms: ['on','partial','off','off','on','off'] },
+    { name: 'Liderança',  perms: ['on','on','on','partial','on','off'] },
+    { name: 'Compliance', perms: ['off','off','off','on','partial','off'] },
+    { name: 'Diretoria',  perms: ['on','on','on','on','on','on'] },
+  ];
+  return (
+    <section className="section" id="permissions">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">04 · Permissões</span>
+          <h2 className="section-title">Onde antes havia três caixas, agora há uma matriz.</h2>
+          <p className="section-lede">
+            A v1 trabalhava com três perfis fixos. A v2 combina três níveis (User, Org, Client) com perfis customizáveis em nível de feature — granularidade real, controlada pela diretoria.
+          </p>
+        </div>
+        <div className="rbac-grid reveal">
+          <div className="rbac-old">
+            <h4><span className="shift-tag v1">v1 · 3 caixas fixas</span></h4>
+            <div className="rbac-old-roles">
+              <div className="rbac-role-fixed"><span className="name">Admin</span><span className="perms">acesso total</span></div>
+              <div className="rbac-role-fixed"><span className="name">Gestor</span><span className="perms">execuções · alocações · projetos · demandas · dashboards</span></div>
+              <div className="rbac-role-fixed"><span className="name">Usuário</span><span className="perms">execuções · alocações · projetos · competências</span></div>
+            </div>
+            <p style={{marginTop: 24, fontSize: 13.5, lineHeight: 1.5, color: 'var(--fg-muted)'}}>
+              Sem flexibilidade para novas estruturas. Adicionar um novo papel exigia alterar código.
+            </p>
+          </div>
+          <div className="rbac-new">
+            <h4><span className="shift-tag v2">v2 · perfis customizáveis</span></h4>
+            <div className="rbac-matrix" role="table">
+              <div className="rbac-head">Permissão</div>
+              {profiles.map(p => (<div key={p.name} className="rbac-head">{p.name}</div>))}
+              {features.map((f, i) => (
+                <React.Fragment key={f}>
+                  <div className="rbac-row-label mono">{f}</div>
+                  {profiles.map(p => (
+                    <div key={p.name + i} className={`rbac-cell ${p.perms[i]}`}>
+                      <span className="dot"></span>
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+            <div style={{display: 'flex', gap: 16, marginTop: 16, fontSize: 12, color: 'var(--fg-muted)', flexWrap: 'wrap'}}>
+              <span style={{display:'inline-flex', alignItems:'center', gap:6}}><span style={{width:10, height:10, borderRadius:3, background:'var(--brand-500)'}}></span> permite</span>
+              <span style={{display:'inline-flex', alignItems:'center', gap:6}}><span style={{width:10, height:10, borderRadius:3, background:'var(--accent-500)'}}></span> condicional</span>
+              <span style={{display:'inline-flex', alignItems:'center', gap:6}}><span style={{width:10, height:10, borderRadius:3, background:'var(--surface-3)'}}></span> nega</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Features() {
+  return (
+    <section className="section" id="features">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">05 · Funcionalidades</span>
+          <h2 className="section-title">O que o SGO faz, em concreto.</h2>
+          <p className="section-lede">
+            Cinco capacidades que sustentam a operação. Não são módulos isolados — todas se cruzam na auditoria, no chat interno e nas métricas do projeto.
+          </p>
+        </div>
+        <div className="features-grid reveal">
+          <div className="feature-card col-4">
+            <span className="feature-tag">chat zello · interno</span>
+            <h3>Conversa onde o trabalho acontece.</h3>
+            <p>O novo Chat Zello substituiu o Mattermost. Canais por organização, cliente e projeto. Conversas amarradas ao escopo, com permissão herdada do RBAC e histórico auditado.</p>
+            <div className="feature-visual">
+              <div className="mini-chat">
+                <div className="mini-chat-side">
+                  <div className="mini-chat-sec">canais</div>
+                  <div className="mini-chat-ch"><span className="hash">#</span><span>geral</span></div>
+                  <div className="mini-chat-ch act"><span className="hash">#</span><span>ops-acme</span><span className="dot"></span></div>
+                  <div className="mini-chat-ch"><span className="hash">#</span><span>prod-vertex</span></div>
+                  <div className="mini-chat-sec" style={{marginTop: 8}}>DMs</div>
+                  <div className="mini-chat-ch"><span className="av-mini a1">BL</span><span>Bruno Lima</span></div>
+                  <div className="mini-chat-ch"><span className="av-mini a2">AS</span><span>Ana Silva</span></div>
+                </div>
+                <div className="mini-chat-main">
+                  <div className="mini-chat-h">
+                    <span className="hash">#</span>
+                    <span className="ch-name">ops-acme</span>
+                    <span className="ch-scope">ORG · DOP / Acme Corp</span>
+                  </div>
+                  <div className="mini-msgs">
+                    <div className="mini-msg">
+                      <span className="av-mini a1">BL</span>
+                      <div>
+                        <div className="mini-msg-h"><b>Bruno</b><span>10:42</span></div>
+                        <div className="mini-msg-b">Subi a release pro homolog do Acme — pode validar?</div>
+                      </div>
+                    </div>
+                    <div className="mini-msg">
+                      <span className="av-mini a2">AS</span>
+                      <div>
+                        <div className="mini-msg-h"><b>Ana</b><span>10:44</span></div>
+                        <div className="mini-msg-b">No ar. Vou rodar o smoke agora.</div>
+                      </div>
+                    </div>
+                    <div className="mini-msg">
+                      <span className="av-mini a3">CD</span>
+                      <div>
+                        <div className="mini-msg-h"><b>Carla</b><span>10:47</span></div>
+                        <div className="mini-msg-b">👍 passou. Liberado para release.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mini-chat-input"><span>Mensagem em #ops-acme…</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card col-2">
+            <span className="feature-tag">audit log</span>
+            <h3>Cada ação rastreada.</h3>
+            <p>Sem esforço manual: toda mutação cria um registro com diff, autor, escopo e timestamp.</p>
+            <div className="feature-visual">
+              <div className="mini-audit">
+                <div className="mini-audit-row"><span className="who">b.lima</span> exec.status update <span className="when">2m</span></div>
+                <div className="mini-audit-row"><span className="who">a.silva</span> perm.role edit <span className="when">14m</span></div>
+                <div className="mini-audit-row"><span className="who">c.dias</span> team.member +1 <span className="when">1h</span></div>
+                <div className="mini-audit-row"><span className="who">b.lima</span> client.created <span className="when">3h</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card col-3">
+            <span className="feature-tag">execuções · alocações</span>
+            <h3>Fluxo dedicado, não modal sobrecarregado.</h3>
+            <p>Status atualizável inline, batch updates, razão de status com popover, exportação CSV nativa. Audit log a cada mudança. WebSocket replica a alteração para outros usuários em tempo real.</p>
+            <div className="feature-visual" style={{padding: 16}}>
+              <div style={{display: 'flex', flexDirection: 'column', gap: 6, height: '100%', justifyContent: 'center'}}>
+                {[
+                  {id: 'EXEC-2041', cli: 'Acme', status: 'Em curso', tone: 'accent'},
+                  {id: 'EXEC-2042', cli: 'Globex', status: 'Aguardando', tone: 'mute'},
+                  {id: 'EXEC-2043', cli: 'Initech', status: 'Concluída', tone: 'done'},
+                  {id: 'EXEC-2044', cli: 'Acme', status: 'Em curso', tone: 'accent'},
+                ].map((r, i) => (
+                  <div key={i} style={{display:'flex', alignItems:'center', gap:10, padding:'7px 10px', background:'var(--bg-elevated)', borderRadius:6, border:'1px solid var(--border)', fontFamily:'JetBrains Mono, monospace', fontSize: 10.5, color:'var(--fg-soft)'}}>
+                    <span style={{color: 'var(--fg-muted)'}}>{r.id}</span>
+                    <span style={{color: 'var(--fg)'}}>{r.cli}</span>
+                    <span style={{
+                      marginLeft: 'auto', padding: '1px 6px', borderRadius: 3, fontSize: 9, fontWeight: 600,
+                      background: r.tone === 'accent' ? 'color-mix(in oklab, var(--accent-500) 18%, transparent)'
+                                : r.tone === 'done' ? 'color-mix(in oklab, var(--accent-500) 12%, transparent)'
+                                : 'var(--surface-2)',
+                      color: r.tone === 'mute' ? 'var(--fg-muted)' : 'var(--accent)'
+                    }}>{r.status}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card col-3">
+            <span className="feature-tag">sprints · metas · custos</span>
+            <h3>Gestão estratégica, não só operacional.</h3>
+            <p>Sprints organizam a entrega; metas amarram objetivos; custos por time fecham o ciclo financeiro. Tudo no mesmo escopo do projeto.</p>
+            <div className="feature-visual">
+              <div className="mini-chart">
+                <div className="mini-chart-line"></div>
+                <div className="mini-chart-row">
+                  {[40, 65, 30, 75, 55, 90, 60, 80, 45, 70, 88, 95].map((h, i) => (
+                    <div key={i} className="mini-chart-bar" style={{height: `${h}%`, opacity: 0.4 + (h/200)}}></div>
+                  ))}
+                </div>
+                <div className="mini-chart-line"></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card col-6">
+            <span className="feature-tag">dashboards próprios</span>
+            <h3>Métricas que importam, sem dependência externa.</h3>
+            <p>Visão consolidada da operação Zello: utilização do time, execuções no mês, atingimento de metas e custo por projeto. Tudo calculado em tempo real, no escopo de cada cliente.</p>
+            <div className="feature-visual" style={{display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, padding: 16}}>
+              {[
+                { l: 'Utilização', v: '86%', sub: 'alocação do time', d: '+4 pp no mês' },
+                { l: 'Execuções', v: '142', sub: 'fechadas no mês', d: '+23% vs anterior' },
+                { l: 'Metas',     v: '74%', sub: 'atingimento Q2', d: '6 de 8 no alvo' },
+                { l: 'Custo',     v: 'R$ 312k', sub: 'time + projeto', d: '-5% vs orçado' },
+              ].map((m, i) => (
+                <div key={i} style={{padding:'14px 16px', background:'var(--bg-elevated)', border:'1px solid var(--border)', borderRadius: 10}}>
+                  <div style={{fontFamily:'JetBrains Mono, monospace', fontSize: 10.5, color:'var(--fg-muted)', textTransform:'uppercase', letterSpacing:'0.04em'}}>{m.l}</div>
+                  <div style={{fontFamily:'Manrope, sans-serif', fontWeight: 700, fontSize: 28, marginTop: 4, color: 'var(--fg)', letterSpacing:'-0.02em'}}>{m.v}</div>
+                  <div style={{fontSize: 11, color:'var(--fg-muted)'}}>{m.sub}</div>
+                  <div style={{fontSize: 10.5, color:'var(--accent)', marginTop:6, fontFamily:'JetBrains Mono, monospace'}}>• {m.d}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Stack() {
+  const groups = [
+    { h: 'Frontend', cat: 'front', items: ['React 18.3', 'Vite 5.4', 'TypeScript', 'Tailwind CSS', 'shadcn/ui (Radix)', 'Zustand', 'TanStack Query', 'React Hook Form', 'Zod', 'DnD Kit', 'recharts', 'socket.io-client'] },
+    { h: 'Backend', cat: 'back', items: ['NestJS 10', 'TypeScript', 'class-validator', 'JWT (httpOnly)', 'OAuth2 Google', 'socket.io', 'Swagger', 'Vitest / Jest'] },
+    { h: 'Dados & infra', cat: 'data', items: ['MongoDB 8.4', 'Mongoose ODM', 'Redis 5.4', 'BullMQ 5.8'] },
+    { h: 'Integração & IA', cat: 'ai', items: ['Express + MCP SDK', 'Tauri (desktop opcional)'] },
+  ];
+  return (
+    <section className="section" id="stack">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">06 · Stack & engenharia</span>
+          <h2 className="section-title">TypeScript do banco ao botão.</h2>
+          <p className="section-lede">
+            Um time, uma linguagem, tipos compartilhados entre front e back. Sem licenças de plataforma de integração, sem código gerado por low-code, sem lock-in de ferramenta.
+          </p>
+        </div>
+        <div className="stack-grid reveal">
+          <div>
+            {groups.map(g => (
+              <React.Fragment key={g.h}>
+                <div className="stack-section-h">{g.h}</div>
+                <div className="stack-pills">
+                  {g.items.map(it => (
+                    <span key={it} className="stack-pill" data-cat={g.cat}>
+                      <span className="dot"></span>{it}
+                    </span>
+                  ))}
+                </div>
+              </React.Fragment>
+            ))}
+            <div className="mcp-callout">
+              <div className="mcp-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+                </svg>
+              </div>
+              <div>
+                <h4>Operável por agentes de IA <span className="mcp-tag">MCP</span></h4>
+                <p>O <span className="mono">apps/mcp-sgo</span> expõe o sistema via Model Context Protocol — algo impensável na arquitetura Mulesoft/Flutter da v1.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="code-window">
+              <div className="code-head">
+                <span className="dots"><i></i><i></i><i></i></span>
+                <span>backend-sgo / src / modules / clients / clients.controller.ts</span>
+              </div>
+              <div className="code-body">
+                <span className="ln dim"><span className="tk-co">// Mesmo tipo no front e no back. Um schema, uma verdade.</span></span>
+                <span className="ln"><span className="tk-kw">import</span> {'{'} ClientDto, CreateClientDto {'}'} <span className="tk-kw">from</span> <span className="tk-st">'@sgo/shared'</span>;</span>
+                <span className="ln"> </span>
+                <span className="ln">@<span className="tk-fn">Controller</span>(<span className="tk-st">'orgs/:orgId/clients'</span>)</span>
+                <span className="ln">@<span className="tk-fn">UseGuards</span>(JwtAuthGuard, OrgScopeGuard)</span>
+                <span className="ln"><span className="tk-kw">export class</span> <span className="tk-ty">ClientsController</span> {'{'}</span>
+                <span className="ln">{"  "}@<span className="tk-fn">Post</span>()</span>
+                <span className="ln">{"  "}@<span className="tk-fn">RequirePermission</span>(<span className="tk-st">'org.clients.create'</span>)</span>
+                <span className="ln">{"  "}<span className="tk-kw">async</span> <span className="tk-fn">create</span>(</span>
+                <span className="ln">{"    "}@<span className="tk-pr">Param</span>(<span className="tk-st">'orgId'</span>) orgId: <span className="tk-ty">string</span>,</span>
+                <span className="ln">{"    "}@<span className="tk-pr">Body</span>() dto: <span className="tk-ty">CreateClientDto</span>,</span>
+                <span className="ln">{"    "}@<span className="tk-pr">CurrentUser</span>() user: <span className="tk-ty">User</span>,</span>
+                <span className="ln">{"  "}): <span className="tk-ty">Promise</span>&lt;<span className="tk-ty">ClientDto</span>&gt; {'{'}</span>
+                <span className="ln">{"    "}<span className="tk-kw">const</span> client = <span className="tk-kw">await</span> <span className="tk-kw">this</span>.svc.<span className="tk-fn">create</span>(orgId, dto, user);</span>
+                <span className="ln">{"    "}<span className="tk-kw">await</span> <span className="tk-kw">this</span>.audit.<span className="tk-fn">log</span>(<span className="tk-st">'client.created'</span>, {'{'} orgId, client {'}'});</span>
+                <span className="ln">{"    "}<span className="tk-kw">this</span>.realtime.<span className="tk-fn">broadcast</span>(orgId, <span className="tk-st">'client:created'</span>, client);</span>
+                <span className="ln">{"    "}<span className="tk-kw">return</span> client;</span>
+                <span className="ln">{"  "}{'}'}</span>
+                <span className="ln">{'}'}</span>
+              </div>
+            </div>
+            <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 12, marginTop: 16}}>
+              {[
+                {l: 'Validação', v: 'Dupla', sub: 'Zod + class-validator'},
+                {l: 'Estado', v: 'Cached', sub: 'Zustand + TanStack Query'},
+                {l: 'Realtime', v: 'Live', sub: 'socket.io'},
+              ].map(s => (
+                <div key={s.l} style={{padding: 14, border: '1px solid var(--border)', borderRadius: 12, background: 'var(--surface)'}}>
+                  <div style={{fontFamily:'JetBrains Mono, monospace', fontSize: 10.5, color:'var(--fg-muted)', textTransform:'uppercase'}}>{s.l}</div>
+                  <div style={{fontFamily:'Manrope', fontWeight: 700, fontSize: 18, marginTop: 4, color: 'var(--fg)'}}>{s.v}</div>
+                  <div style={{fontSize: 11.5, color:'var(--fg-muted)'}}>{s.sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Roadmap() {
+  const steps = [
+    { q: 'Q1 / 2026', state: 'done', title: 'Decisão: criar o SGO v2', body: 'Análise da v1 (FlutterFlow + Mulesoft) e do que ela já não comportava. Decisão estratégica de reescrever do zero, em casa, com nossa stack e nossa metodologia.' },
+    { q: 'Q2 / 2026', state: 'now',  title: 'Onde estamos', body: 'SGO v2 em produção. Multi-tenancy, RBAC, audit log, sprints, metas e dashboards próprios. Organizações e Clientes implementados. Novo Chat Zello no ar — substituto oficial do Mattermost.' },
+    { q: 'Q3 / 2026', state: 'next', title: 'ATS + Gestão de Pessoas', body: 'ATS para recrutamento e seleção. Avaliações pós-demanda, feedback do gestor sobre o time e acompanhamento dos colaboradores. Gestão de Férias. Agenda · Lancha — reserva de datas.' },
+    { q: 'Q4 / 2026', state: '',     title: 'E agora, o que vem a seguir?', body: 'Chegamos até aqui juntos. O próximo passo é a Zello que decide: quais dores ainda precisam de um lar? Quais processos faltam? Estamos prontos.' },
+    { q: '2027',      state: '',     title: 'SGO com a cara da Zello', body: 'Todos os parâmetros e controles da operação em um único lugar — com a identidade, o ritmo e a cultura da empresa. Visibilidade total, gestão centralizada, independência de ferramentas externas.' },
+  ];
+  return (
+    <section className="section" id="roadmap">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">07 · Roadmap</span>
+          <h2 className="section-title">O que vem a seguir.</h2>
+          <p className="section-lede">
+            A v2 já é a base. Os próximos quatro marcos consolidam o produto e abrem o caminho para servir outras organizações além da Zello.
+          </p>
+        </div>
+        <div className="roadmap-track reveal">
+          {steps.map(s => (
+            <div key={s.q} className={`roadmap-step ${s.state}`}>
+              <div className="roadmap-quarter">{s.q}</div>
+              <h4>{s.title}</h4>
+              <p>{s.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DevStory() {
+  const stats = [
+    { v: '382', l: 'Cards no board' },
+    { type: 'breakdown', l: 'Esforço manual por card',
+      rows: [
+        { k: 'S', count: '230 cards', time: '~2 dias cada' },
+        { k: 'M', count: '135 cards', time: '~5 dias cada' },
+        { k: 'L', count: '10 cards',  time: '~12 dias cada' },
+      ] },
+    { v: '1.250', l: 'Dev-dias manuais', sub: 'equivalente em esforço humano' },
+    { v: '1 mês', l: 'Tempo real', sub: 'do primeiro card ao SGO v2' },
+  ];
+  const flow = [
+    { k: 'spec kit', t: 'Levantamento',  d: 'Sessão iterativa com o humano para entender o quê e o porquê. O comando /z-new-spec-kit força clareza antes de qualquer código.' },
+    { k: 'prd', t: 'PRD + cards',   d: 'A demanda vira PRD, que se decompõe em cards S/M/L com dependências. Cada card já nasce com critérios de aceite.' },
+    { k: 'pipeline', t: 'Pipeline',  d: 'Refinamento → Arquitetura → Dev → Review → Done Gate. Cada fase é um agente especializado; o humano só pausa em decisões críticas.' },
+    { k: 'kanban', t: 'Board é a fonte da verdade', d: 'Todo histórico vive no card: spec, plano, review, decisões. Se o agente é interrompido, /z-pipeline {ID} retoma do ponto exato.' },
+  ];
+  const quotes = [
+    { who: 'Luiz Felipe', role: 'Engenharia · SGO', init: 'LF', tone: 'a',
+      body: [
+        'Desenvolver o SGO com o Claude Code foi uma experiência diferente de tudo que já vi. Sou analista, não programador — entendo o básico de código, mas não escrevo. E foi exatamente isso que fez a diferença: ter entendimento suficiente para criar prompts precisos, descrever o problema certo, e questionar quando algo não fazia sentido.',
+        'O que mais me surpreendeu foi o Spec Kit. Antes de qualquer linha de código, ele me força a pensar no o quê e no por quê — não no como. Isso mudou completamente a qualidade das demandas. Os cards saíam completos: critérios de aceite claros, edge cases mapeados, escopo bem definido. O agente de desenvolvimento não precisava adivinhar nada.',
+        'Não é sobre saber programar. É sobre saber o que você quer — e ter uma ferramenta que te ajuda a articular isso com precisão.',
+      ] },
+    { who: 'Philipe Firmo', role: 'Engenharia · SGO', init: 'PF', tone: 'b',
+      body: ['[Placeholder — envie o feedback do Philipe Firmo sobre o processo. Vou substituir aqui.]'] },
+  ];
+  return (
+    <section className="section" id="devstory">
+      <div className="container">
+        <div className="reveal">
+          <span className="eyebrow">08 · Como foi feito</span>
+          <h2 className="section-title">Spec-first, agent-driven.</h2>
+          <p className="section-lede">
+            99% do SGO foi escrito com Claude Code seguindo uma metodologia própria — o board virou fonte da verdade e os agentes assumiram o pipeline de execução. Por baixo dos números, um time pequeno tomando decisões grandes.
+          </p>
+        </div>
+        <div className="ds-stats reveal">
+          {stats.map(s => (
+            <div className={`ds-stat${s.type === 'breakdown' ? ' ds-stat--breakdown' : ''}`} key={s.l}>
+              {s.type === 'breakdown' ? (
+                <>
+                  <ul className="ds-stat-rows">
+                    {s.rows.map(r => (
+                      <li key={r.k}>
+                        <span className="ds-stat-tag">{r.k}</span>
+                        <span className="ds-stat-count">{r.count}</span>
+                        <span className="ds-stat-time">{r.time}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="ds-stat-l">{s.l}</div>
+                </>
+              ) : (
+                <>
+                  <div className="ds-stat-v">{s.v}</div>
+                  <div className="ds-stat-l">{s.l}</div>
+                  {s.sub && <div className="ds-stat-sub">{s.sub}</div>}
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="ds-grid reveal">
+          <div className="ds-flow">
+            <div className="ds-flow-h">
+              <span className="ds-flow-eyebrow">Fluxo de trabalho</span>
+              <h3>Da ideia ao done, sem handoff por email.</h3>
+            </div>
+            <ol className="ds-flow-list">
+              {flow.map((f, i) => (
+                <li key={f.k} className="ds-flow-step">
+                  <span className="ds-flow-num">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <div className="ds-flow-k">{f.k}</div>
+                    <div className="ds-flow-t">{f.t}</div>
+                    <p>{f.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="ds-flow-foot">
+              <span className="mono">tamanho (S/M/L) define a rota</span>
+              <span className="sep">·</span>
+              <span className="mono">humano só nos gates críticos</span>
+            </div>
+          </div>
+          <div className="ds-voices">
+            {quotes.map(q => (
+              <figure className={`ds-quote tone-${q.tone}`} key={q.who}>
+                <svg className="ds-qmark" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                  <path d="M9 21h-3v-6c0-3 2-6 5-7v3c-1.5 1-2 2.5-2 4h3v6zm12 0h-3v-6c0-3 2-6 5-7v3c-1.5 1-2 2.5-2 4h3v6z" fill="currentColor"/>
+                </svg>
+                <blockquote>{q.body.map((p, i) => <p key={i}>{p}</p>)}</blockquote>
+                <figcaption>
+                  <span className={`ds-av av-${q.tone}`}>{q.init}</span>
+                  <span>
+                    <b>{q.who}</b>
+                    <span className="ds-role">{q.role}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTA() {
+  return (
+    <section className="section" id="cta" style={{paddingBottom: 0}}>
+      <div className="container">
+        <div className="cta reveal">
+          <div className="cta-inner">
+            <h2>Bora ver o SGO funcionando?</h2>
+            <p>Entra com seu acesso Zello e dá uma volta pelo sistema.</p>
+            <div className="cta-actions">
+              <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary">
+                Vamos lá?
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-row">
+          <div style={{maxWidth: 320}}>
+            <LogoSGO />
+            <p style={{marginTop: 16, fontSize: 14, lineHeight: 1.6, color: 'var(--fg-muted)'}}>
+              Plataforma de gestão organizacional multi-tenant. Construída pelo squad de IA &amp; Operações da Zello.
+            </p>
+          </div>
+          <div className="footer-col">
+            <h5>Produto</h5>
+            <ul>
+              <li><a href="#tenancy">Multi-tenancy</a></li>
+              <li><a href="#permissions">Permissões</a></li>
+              <li><a href="#features">Funcionalidades</a></li>
+              <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h5>Engenharia</h5>
+            <ul>
+              <li><a href="#stack">Stack</a></li>
+              <li><a href="#stack">MCP / Agentes</a></li>
+              <li><a href="#shift">v1 → v2</a></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h5>Contato</h5>
+            <ul>
+              <li><a href="https://sgo.zello.space/login" target="_blank" rel="noopener">Entrar no SGO</a></li>
+              <li><a href="mailto:sgo@zello.tec.br">sgo@zello.tec.br</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <ZelloMark />
+          <span className="mono" style={{fontSize: 12, color: 'var(--fg-dim)'}}>© 2026 · SGO v2 · Build {new Date().toISOString().slice(0,10)}</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const [theme, setTheme] = useState('dark');
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.dataset.density = 'comfortable';
+  }, [theme]);
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal:not(.in)');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(e => e.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+  return (
+    <>
+      <Nav theme={theme} setTheme={setTheme} />
+      <main>
+        <Hero />
+        <Shift />
+        <MultiTenancy />
+        <RBAC />
+        <Features />
+        <Stack />
+        <Roadmap />
+        <DevStory />
+        <CTA />
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
