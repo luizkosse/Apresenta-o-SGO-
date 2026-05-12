@@ -1,0 +1,13 @@
+{
+  "name": "apresentacao-sgo",
+  "version": "1.0.0",
+  "description": "Site de apresentação SGO v2",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Build complete (static site)'",
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
