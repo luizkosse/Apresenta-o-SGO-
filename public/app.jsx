@@ -43,9 +43,9 @@ function App() {
         <MultiTenancy />
         <RBAC />
         <Features />
-        <Stack />
-        <Roadmap />
+        <Benefits />
         <DevStory />
+        <Roadmap />
         <CTA />
       </main>
       <Footer />

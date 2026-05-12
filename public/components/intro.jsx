@@ -42,7 +42,7 @@ function Nav({ theme, setTheme }) {
         <a className="nav-link" href="#tenancy">Multi-tenant</a>
         <a className="nav-link" href="#permissions">Permissões</a>
         <a className="nav-link" href="#features">Funcionalidades</a>
-        <a className="nav-link" href="#stack">Stack</a>
+        <a className="nav-link" href="#benefits">Benefícios</a>
         <a className="nav-link" href="#roadmap">Roadmap</a>
       </div>
       <div className="nav-actions">
@@ -80,7 +80,7 @@ function Hero() {
             <span className="accent-word">Operação no controle.</span>
           </h1>
           <p className="hero-sub reveal in">
-            O SGO deixou de ser uma ferramenta operacional interna para se tornar uma plataforma multi-tenant, escrita 100&nbsp;% em TypeScript, com permissões granulares, auditoria nativa e operação em tempo real.
+            O SGO deixou de ser uma ferramenta operacional interna para se tornar uma plataforma multi-tenant feita em casa, pensada para evoluir rápido e sustentar a operação no longo prazo — com permissões granulares, auditoria nativa e operação em tempo real.
           </p>
           <div className="hero-cta reveal in">
             <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary">
@@ -966,10 +966,10 @@ function MockKanban() {
 
 function HeroStats() {
   const stats = [
-    { num: '3', label: 'aplicações em monorepo (front · back · MCP)' },
-    { num: '17+', label: 'features no front, 20+ módulos no back' },
+    { num: 'Em casa', label: 'feito pela Zello, sem dependência de fornecedor' },
+    { num: 'Real-time', label: 'auditoria e operação ao vivo, sem esforço manual' },
     { num: '∞', label: 'perfis de permissão (antes: 3 fixos)' },
-    { num: '100%', label: 'TypeScript, do banco ao botão' },
+    { num: 'SaaS', label: 'multi-tenant — pronta para servir além da Zello' },
   ];
   return (
     <div className="hero-stats reveal" data-stagger="400">
@@ -986,15 +986,15 @@ function HeroStats() {
 // ===== Section 2: The Shift (v1 -> v2) =====
 function Shift() {
   const rows = [
-    { k: 'Frontend', v1: 'Flutter (FlutterFlow)', v2: 'React 18 + Vite' },
-    { k: 'Backend',  v1: 'Mulesoft (low-code)', v2: 'NestJS 10' },
-    { k: 'Banco',    v1: 'SQL relacional', v2: 'MongoDB 8' },
-    { k: 'Auth',     v1: 'Firebase Auth', v2: 'OAuth Google + JWT' },
-    { k: 'Tenancy',  v1: 'Single-tenant', v2: 'Multi-tenant (Org → Client)' },
-    { k: 'Permissões', v1: '3 perfis fixos', v2: 'RBAC granular + perfis' },
-    { k: 'Auditoria', v1: 'Inexistente', v2: 'Automática em toda operação' },
-    { k: 'Realtime', v1: 'Inexistente', v2: 'WebSockets (socket.io)' },
-    { k: 'Testes',   v1: 'Ausentes', v2: 'Vitest, Jest, Testing Library' },
+    { k: 'Quem mantém',       v1: 'Fornecedor externo',         v2: 'Time Zello, em casa' },
+    { k: 'Ritmo de evolução', v1: 'Trimestres, via contrato',   v2: 'Dias — iteração contínua' },
+    { k: 'Custo',             v1: 'Licenças por usuário',       v2: 'Sem licenças de plataforma' },
+    { k: 'Escopo',            v1: 'Uma operação interna',       v2: 'Multi-tenant (Org → Cliente)' },
+    { k: 'Permissões',        v1: '3 perfis fixos',             v2: 'Perfis customizáveis por papel' },
+    { k: 'Auditoria',         v1: 'Inexistente',                v2: 'Automática em toda operação' },
+    { k: 'Operação ao vivo',  v1: 'Recarregar a tela',          v2: 'Atualização em tempo real' },
+    { k: 'Integração com IA', v1: 'Inviável',                   v2: 'Operável por agentes' },
+    { k: 'Qualidade',         v1: 'Sem testes automatizados',   v2: 'Cobertura automatizada' },
   ];
   return (
     <section className="section" id="shift">
@@ -1003,7 +1003,7 @@ function Shift() {
           <span className="eyebrow">02 · A virada</span>
           <h2 className="section-title">Reconstruímos do zero — sem nostalgia.</h2>
           <p className="section-lede">
-            A v1 fez seu papel. Mas FlutterFlow gerando código, Mulesoft e SQL engessado tinham teto. A v2 não é refatoração: é uma plataforma nova, escrita por nosso time.
+            A v1 fez seu papel, mas dependia de fornecedor para evoluir — e isso virou teto. A v2 não é refatoração: é uma plataforma nova, feita em casa, pensada para evoluir rápido e sustentar a operação no longo prazo.
           </p>
         </div>
 

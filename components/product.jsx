@@ -172,100 +172,110 @@ function Features() {
   );
 }
 
-// ===== Stack =====
-function Stack() {
-  const groups = [
-    { h: 'Frontend', cat: 'front', items: ['React 18.3', 'Vite 5.4', 'TypeScript', 'Tailwind CSS', 'shadcn/ui (Radix)', 'Zustand', 'TanStack Query', 'React Hook Form', 'Zod', 'DnD Kit', 'recharts', 'socket.io-client'] },
-    { h: 'Backend', cat: 'back', items: ['NestJS 10', 'TypeScript', 'class-validator', 'JWT (httpOnly)', 'OAuth2 Google', 'socket.io', 'Swagger', 'Vitest / Jest'] },
-    { h: 'Dados & infra', cat: 'data', items: ['MongoDB 8.4', 'Mongoose ODM', 'Redis 5.4', 'BullMQ 5.8'] },
-    { h: 'Integração & IA', cat: 'ai', items: ['Express + MCP SDK', 'Tauri (desktop opcional)'] },
+// ===== Benefits =====
+function Benefits() {
+  const items = [
+    {
+      tag: 'Independência operacional',
+      h: 'Sem fornecedor no caminho crítico.',
+      p: 'Plataforma feita em casa, mantida pelo time Zello. Toda decisão de produto vira código em dias — não em contratos.',
+    },
+    {
+      tag: 'Custo previsível',
+      h: 'Sem licenças por usuário.',
+      p: 'Crescer a operação não significa renegociar contrato. O custo é de infraestrutura, não de licença de plataforma.',
+    },
+    {
+      tag: 'Visibilidade total',
+      h: 'Toda ação registrada, todo dado escopado.',
+      p: 'Auditoria nativa em cada mutação. Métricas em tempo real. Quem fez, quando e em qual cliente — sempre.',
+    },
+    {
+      tag: 'Governança',
+      h: 'Permissões que acompanham a estrutura real.',
+      p: 'Perfis granulares por papel, isolamento por cliente, escopo herdado. A diretoria controla o que cada pessoa pode em cada lugar.',
+    },
+    {
+      tag: 'Evolução contínua',
+      h: 'Mudanças entram em dias, não em trimestres.',
+      p: 'Sem dependência de fornecedor, sem amarras de plataforma. O time evolui o produto no ritmo da operação.',
+    },
+    {
+      tag: 'Plataforma como ativo',
+      h: 'Pronta para servir além da Zello.',
+      p: 'Multi-tenant desde a fundação. A mesma plataforma que roda a operação interna pode atender outras organizações.',
+    },
   ];
   return (
-    <section className="section" id="stack">
+    <section className="section" id="benefits">
+      <style>{`
+        .benefits-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-top: 32px;
+        }
+        .benefit-card {
+          padding: 22px 22px 24px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          transition: border-color 200ms ease, transform 200ms ease;
+        }
+        .benefit-card:hover {
+          border-color: color-mix(in oklab, var(--brand-500) 30%, var(--border));
+          transform: translateY(-2px);
+        }
+        .benefit-tag {
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 10.5px;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: var(--accent);
+          background: color-mix(in oklab, var(--accent-500) 12%, transparent);
+          border: 1px solid color-mix(in oklab, var(--accent-500) 25%, transparent);
+          padding: 4px 8px;
+          border-radius: 4px;
+          width: fit-content;
+        }
+        .benefit-card h3 {
+          font-family: 'Manrope', sans-serif;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 1.25;
+          color: var(--fg);
+          letter-spacing: -0.01em;
+          margin: 4px 0 0;
+        }
+        .benefit-card p {
+          font-size: 14px;
+          line-height: 1.55;
+          color: var(--fg-muted);
+          margin: 0;
+        }
+        @media (max-width: 960px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .benefits-grid { grid-template-columns: 1fr; } }
+      `}</style>
       <div className="container">
         <div className="reveal">
-          <span className="eyebrow">06 · Stack & engenharia</span>
-          <h2 className="section-title">TypeScript do banco ao botão.</h2>
+          <span className="eyebrow">06 · Benefícios</span>
+          <h2 className="section-title">O que a Zello ganha com o SGO v2.</h2>
           <p className="section-lede">
-            Um time, uma linguagem, tipos compartilhados entre front e back. Sem licenças de plataforma de integração, sem código gerado por low-code, sem lock-in de ferramenta.
+            A virada técnica é só meio. O fim é operar com mais autonomia, menos custo recorrente e visibilidade total — e, no caminho, transformar o sistema interno em produto.
           </p>
         </div>
 
-        <div className="stack-grid reveal">
-          <div>
-            {groups.map(g => (
-              <React.Fragment key={g.h}>
-                <div className="stack-section-h">{g.h}</div>
-                <div className="stack-pills">
-                  {g.items.map(it => (
-                    <span key={it} className="stack-pill" data-cat={g.cat}>
-                      <span className="dot"></span>{it}
-                    </span>
-                  ))}
-                </div>
-              </React.Fragment>
-            ))}
-
-            <div className="mcp-callout">
-              <div className="mcp-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
-                </svg>
-              </div>
-              <div>
-                <h4>
-                  Operável por agentes de IA
-                  <span className="mcp-tag">MCP</span>
-                </h4>
-                <p>O <span className="mono">apps/mcp-sgo</span> expõe o sistema via Model Context Protocol — algo impensável na arquitetura Mulesoft/Flutter da v1.</p>
-              </div>
+        <div className="benefits-grid reveal">
+          {items.map((b, i) => (
+            <div className="benefit-card" key={i}>
+              <span className="benefit-tag">{b.tag}</span>
+              <h3>{b.h}</h3>
+              <p>{b.p}</p>
             </div>
-          </div>
-
-          <div>
-            <div className="code-window">
-              <div className="code-head">
-                <span className="dots"><i></i><i></i><i></i></span>
-                <span>backend-sgo / src / modules / clients / clients.controller.ts</span>
-              </div>
-              <div className="code-body">
-                <span className="ln dim"><span className="tk-co">// Mesmo tipo no front e no back. Um schema, uma verdade.</span></span>
-                <span className="ln"><span className="tk-kw">import</span> {'{'} ClientDto, CreateClientDto {'}'} <span className="tk-kw">from</span> <span className="tk-st">'@sgo/shared'</span>;</span>
-                <span className="ln"> </span>
-                <span className="ln">@<span className="tk-fn">Controller</span>(<span className="tk-st">'orgs/:orgId/clients'</span>)</span>
-                <span className="ln">@<span className="tk-fn">UseGuards</span>(JwtAuthGuard, OrgScopeGuard)</span>
-                <span className="ln"><span className="tk-kw">export class</span> <span className="tk-ty">ClientsController</span> {'{'}</span>
-                <span className="ln">{"  "}@<span className="tk-fn">Post</span>()</span>
-                <span className="ln">{"  "}@<span className="tk-fn">RequirePermission</span>(<span className="tk-st">'org.clients.create'</span>)</span>
-                <span className="ln">{"  "}<span className="tk-kw">async</span> <span className="tk-fn">create</span>(</span>
-                <span className="ln">{"    "}@<span className="tk-pr">Param</span>(<span className="tk-st">'orgId'</span>) orgId: <span className="tk-ty">string</span>,</span>
-                <span className="ln">{"    "}@<span className="tk-pr">Body</span>() dto: <span className="tk-ty">CreateClientDto</span>,</span>
-                <span className="ln">{"    "}@<span className="tk-pr">CurrentUser</span>() user: <span className="tk-ty">User</span>,</span>
-                <span className="ln">{"  "}): <span className="tk-ty">Promise</span>&lt;<span className="tk-ty">ClientDto</span>&gt; {'{'}</span>
-                <span className="ln">{"    "}<span className="tk-kw">const</span> client = <span className="tk-kw">await</span> <span className="tk-kw">this</span>.svc.<span className="tk-fn">create</span>(orgId, dto, user);</span>
-                <span className="ln">{"    "}<span className="tk-kw">await</span> <span className="tk-kw">this</span>.audit.<span className="tk-fn">log</span>(<span className="tk-st">'client.created'</span>, {'{'} orgId, client {'}'});</span>
-                <span className="ln">{"    "}<span className="tk-kw">this</span>.realtime.<span className="tk-fn">broadcast</span>(orgId, <span className="tk-st">'client:created'</span>, client);</span>
-                <span className="ln">{"    "}<span className="tk-kw">return</span> client;</span>
-                <span className="ln">{"  "}{'}'}</span>
-                <span className="ln">{'}'}</span>
-              </div>
-            </div>
-
-            <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap: 12, marginTop: 16}}>
-              {[
-                {l: 'Validação', v: 'Dupla', sub: 'Zod + class-validator'},
-                {l: 'Estado', v: 'Cached', sub: 'Zustand + TanStack Query'},
-                {l: 'Realtime', v: 'Live', sub: 'socket.io'},
-              ].map(s => (
-                <div key={s.l} style={{padding: 14, border: '1px solid var(--border)', borderRadius: 12, background: 'var(--surface)'}}>
-                  <div style={{fontFamily:'JetBrains Mono, monospace', fontSize: 10.5, color:'var(--fg-muted)', textTransform:'uppercase'}}>{s.l}</div>
-                  <div style={{fontFamily:'Manrope', fontWeight: 700, fontSize: 18, marginTop: 4, color: 'var(--fg)'}}>{s.v}</div>
-                  <div style={{fontSize: 11.5, color:'var(--fg-muted)'}}>{s.sub}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -285,7 +295,7 @@ function Roadmap() {
     <section className="section" id="roadmap">
       <div className="container">
         <div className="reveal">
-          <span className="eyebrow">07 · Roadmap</span>
+          <span className="eyebrow">08 · Roadmap</span>
           <h2 className="section-title">O que vem a seguir.</h2>
           <p className="section-lede">
             A v2 já é a base. Os próximos quatro marcos consolidam o produto e abrem o caminho para servir outras organizações além da Zello.
@@ -345,15 +355,15 @@ function Footer() {
               <li><a href="#tenancy">Multi-tenancy</a></li>
               <li><a href="#permissions">Permissões</a></li>
               <li><a href="#features">Funcionalidades</a></li>
+              <li><a href="#benefits">Benefícios</a></li>
               <li><a href="#roadmap">Roadmap</a></li>
             </ul>
           </div>
           <div className="footer-col">
             <h5>Engenharia</h5>
             <ul>
-              <li><a href="#stack">Stack</a></li>
-              <li><a href="#stack">MCP / Agentes</a></li>
-              <li><a href="#shift">v1 → v2</a></li>
+              <li><a href="#shift">A virada</a></li>
+              <li><a href="#devstory">Como foi feito</a></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -373,4 +383,4 @@ function Footer() {
   );
 }
 
-Object.assign(window, { Features, Stack, Roadmap, CTA, Footer });
+Object.assign(window, { Features, Benefits, Roadmap, CTA, Footer });
