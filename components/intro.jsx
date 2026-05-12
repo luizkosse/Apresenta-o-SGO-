@@ -73,14 +73,14 @@ function Hero() {
         <div className="hero-inner">
           <div className="hero-badge reveal in">
             <span className="hero-badge-tag">v2 · 2026</span>
-            <span>Reconstruída do zero como produto SaaS</span>
+            <span>Reconstruída do zero, feita em casa pela Zello</span>
           </div>
           <h1 className="reveal in">
             Uma plataforma. Múltiplas organizações.<br/>
             <span className="accent-word">Operação no controle.</span>
           </h1>
           <p className="hero-sub reveal in">
-            O SGO deixou de ser uma ferramenta operacional interna para se tornar uma plataforma multi-tenant feita em casa, pensada para evoluir rápido e sustentar a operação no longo prazo — com permissões granulares, auditoria nativa e operação em tempo real.
+            O SGO deixou de ser uma ferramenta operacional limitada para se tornar a plataforma da Zello — feita em casa, pensada para cobrir tudo que a operação precisar, com permissões granulares, auditoria nativa e operação em tempo real.
           </p>
           <div className="hero-cta reveal in">
             <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary">
@@ -969,7 +969,7 @@ function HeroStats() {
     { num: 'Em casa', label: 'feito pela Zello, sem dependência de fornecedor' },
     { num: 'Real-time', label: 'auditoria e operação ao vivo, sem esforço manual' },
     { num: '∞', label: 'perfis de permissão (antes: 3 fixos)' },
-    { num: 'SaaS', label: 'multi-tenant — pronta para servir além da Zello' },
+    { num: 'Da Zello', label: 'plataforma feita para cobrir tudo que a operação precisar' },
   ];
   return (
     <div className="hero-stats reveal" data-stagger="400">

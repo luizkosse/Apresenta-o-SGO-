@@ -76,7 +76,7 @@ function MultiTenancy() {
       <div className="container">
         <div className="reveal">
           <span className="eyebrow">03 · Multi-tenant</span>
-          <h2 className="section-title">De ferramenta interna<br/>a plataforma SaaS.</h2>
+          <h2 className="section-title">Uma plataforma.<br/>Toda a operação Zello.</h2>
           <p className="section-lede">
             A mudança conceitual mais profunda da v2: o que era "cadastro de cliente" virou um tenant isolado. Toda entidade carrega <span className="mono" style={{color:'var(--accent)'}}>orgId</span> e <span className="mono" style={{color:'var(--accent)'}}>clientId</span>. Hover em cada nível para ver o que muda.
           </p>

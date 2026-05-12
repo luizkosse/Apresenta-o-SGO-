@@ -201,9 +201,9 @@ function Benefits() {
       p: 'Sem dependência de fornecedor, sem amarras de plataforma. O time evolui o produto no ritmo da operação.',
     },
     {
-      tag: 'Plataforma como ativo',
-      h: 'Pronta para servir além da Zello.',
-      p: 'Multi-tenant desde a fundação. A mesma plataforma que roda a operação interna pode atender outras organizações.',
+      tag: 'Plataforma de toda a operação',
+      h: 'Um sistema, todas as áreas da Zello.',
+      p: 'O SGO foi pensado para cobrir tudo que a Zello precisar — operação, clientes, times, pessoas, custos. Tudo em um lugar, com a identidade e o ritmo da empresa.',
     },
   ];
   return (
@@ -298,7 +298,7 @@ function Roadmap() {
           <span className="eyebrow">08 · Roadmap</span>
           <h2 className="section-title">O que vem a seguir.</h2>
           <p className="section-lede">
-            A v2 já é a base. Os próximos quatro marcos consolidam o produto e abrem o caminho para servir outras organizações além da Zello.
+            A v2 já é a base. Os próximos marcos consolidam o produto e cobrem cada vez mais áreas da operação Zello.
           </p>
         </div>
 

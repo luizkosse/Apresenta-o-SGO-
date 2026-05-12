@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SGO v2 — plataforma SaaS multi-tenant de gestão organizacional, construída pela Zello.">
+  <meta name="description" content="SGO v2 — a plataforma de gestão da Zello, feita em casa para cobrir tudo que a operação precisar.">
   <title>SGO v2 — Uma plataforma. Múltiplas organizações.</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -923,7 +923,7 @@ function HeroStats() {
     { num: 'Em casa', label: 'feito pela Zello, sem dependência de fornecedor' },
     { num: 'Real-time', label: 'auditoria e operação ao vivo, sem esforço manual' },
     { num: '∞', label: 'perfis de permissão (antes: 3 fixos)' },
-    { num: 'SaaS', label: 'multi-tenant — pronta para servir além da Zello' },
+    { num: 'Da Zello', label: 'plataforma feita para cobrir tudo que a operação precisar' },
   ];
   return (
     <div className="hero-stats reveal">
@@ -945,14 +945,14 @@ function Hero() {
         <div className="hero-inner">
           <div className="hero-badge reveal in">
             <span className="hero-badge-tag">v2 · 2026</span>
-            <span>Reconstruída do zero como produto SaaS</span>
+            <span>Reconstruída do zero, feita em casa pela Zello</span>
           </div>
           <h1 className="reveal in">
             Uma plataforma. Múltiplas organizações.<br/>
             <span className="accent-word">Operação no controle.</span>
           </h1>
           <p className="hero-sub reveal in">
-            O SGO deixou de ser uma ferramenta operacional interna para se tornar uma plataforma multi-tenant feita em casa, pensada para evoluir rápido e sustentar a operação no longo prazo — com permissões granulares, auditoria nativa e operação em tempo real.
+            O SGO deixou de ser uma ferramenta operacional limitada para se tornar a plataforma da Zello — feita em casa, pensada para cobrir tudo que a operação precisar, com permissões granulares, auditoria nativa e operação em tempo real.
           </p>
           <div className="hero-cta reveal in">
             <a href="https://sgo.zello.space/login" target="_blank" rel="noopener" className="btn btn-primary">
@@ -1049,7 +1049,7 @@ function MultiTenancy() {
       <div className="container">
         <div className="reveal">
           <span className="eyebrow">03 · Multi-tenant</span>
-          <h2 className="section-title">De ferramenta interna<br/>a plataforma SaaS.</h2>
+          <h2 className="section-title">Uma plataforma.<br/>Toda a operação Zello.</h2>
           <p className="section-lede">
             A mudança conceitual mais profunda da v2: o que era "cadastro de cliente" virou um tenant isolado. Toda entidade carrega <span className="mono" style={{color:'var(--accent)'}}>orgId</span> e <span className="mono" style={{color:'var(--accent)'}}>clientId</span>.
           </p>
@@ -1298,7 +1298,7 @@ function Benefits() {
     { tag: 'Visibilidade total', h: 'Toda ação registrada, todo dado escopado.', p: 'Auditoria nativa em cada mutação. Métricas em tempo real. Quem fez, quando e em qual cliente — sempre.' },
     { tag: 'Governança', h: 'Permissões que acompanham a estrutura real.', p: 'Perfis granulares por papel, isolamento por cliente, escopo herdado. A diretoria controla o que cada pessoa pode em cada lugar.' },
     { tag: 'Evolução contínua', h: 'Mudanças entram em dias, não em trimestres.', p: 'Sem dependência de fornecedor, sem amarras de plataforma. O time evolui o produto no ritmo da operação.' },
-    { tag: 'Plataforma como ativo', h: 'Pronta para servir além da Zello.', p: 'Multi-tenant desde a fundação. A mesma plataforma que roda a operação interna pode atender outras organizações.' },
+    { tag: 'Plataforma de toda a operação', h: 'Um sistema, todas as áreas da Zello.', p: 'O SGO foi pensado para cobrir tudo que a Zello precisar — operação, clientes, times, pessoas, custos. Tudo em um lugar, com a identidade e o ritmo da empresa.' },
   ];
   return (
     <section className="section" id="benefits">
@@ -1336,7 +1336,7 @@ function Benefits() {
 
 function Roadmap() {
   const steps = [
-    { q: 'Q1 / 2026', state: 'done', title: 'Decisão: criar o SGO v2', body: 'Análise da v1 (FlutterFlow + Mulesoft) e do que ela já não comportava. Decisão estratégica de reescrever do zero, em casa, com nossa stack e nossa metodologia.' },
+    { q: 'Q1 / 2026', state: 'done', title: 'Decisão: criar o SGO v2', body: 'Análise do que a v1 já não comportava — dependência de fornecedor para evoluir, custo de licenças e modelo engessado. Decisão estratégica de reescrever do zero, em casa, com metodologia própria.' },
     { q: 'Q2 / 2026', state: 'now',  title: 'Onde estamos', body: 'SGO v2 em produção. Multi-tenancy, RBAC, audit log, sprints, metas e dashboards próprios. Organizações e Clientes implementados. Novo Chat Zello no ar — substituto oficial do Mattermost.' },
     { q: 'Q3 / 2026', state: 'next', title: 'ATS + Gestão de Pessoas', body: 'ATS. Avaliações pós-demanda, feedback do gestor sobre o time e acompanhamento dos colaboradores. Gestão de Férias. Agenda · Lancha — reserva de datas.' },
     { q: 'Q4 / 2026', state: '',     title: 'E agora, o que vem a seguir?', body: 'Chegamos até aqui juntos. O próximo passo é a Zello que decide: quais dores ainda precisam de um lar? Quais processos faltam? Estamos prontos.' },
@@ -1349,7 +1349,7 @@ function Roadmap() {
           <span className="eyebrow">08 · Roadmap</span>
           <h2 className="section-title">O que vem a seguir.</h2>
           <p className="section-lede">
-            A v2 já é a base. Os próximos quatro marcos consolidam o produto e abrem o caminho para servir outras organizações além da Zello.
+            A v2 já é a base. Os próximos marcos consolidam o produto e cobrem cada vez mais áreas da operação Zello.
           </p>
         </div>
         <div className="roadmap-track reveal">
