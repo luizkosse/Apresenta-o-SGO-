@@ -613,8 +613,8 @@ section.section {
   gap: 56px;
   align-items: center;
 }
-@media (max-width: 1000px) {
-  .tenant-diagram { grid-template-columns: 1fr; }
+@media (max-width: 1180px) {
+  .tenant-diagram { grid-template-columns: 1fr; gap: 40px; }
 }
 .tenant-stage {
   position: relative;
@@ -669,6 +669,12 @@ section.section {
 .tenant-level.l-2 { margin-left: 32px; }
 .tenant-level.l-3 { margin-left: 64px; }
 .tenant-level.l-4 { margin-left: 96px; }
+@media (max-width: 640px) {
+  .tenant-stage { padding: 24px; }
+  .tenant-level.l-2 { margin-left: 16px; }
+  .tenant-level.l-3 { margin-left: 32px; }
+  .tenant-level.l-4 { margin-left: 48px; }
+}
 .tenant-icon {
   width: 36px; height: 36px;
   border-radius: 10px;
