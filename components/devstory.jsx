@@ -2,17 +2,17 @@
 
 function DevStory() {
   const stats = [
-    { v: '382', l: 'Cards no board' },
+    { v: '462', l: 'Cards no board' },
     {
       type: 'breakdown',
       l: 'Esforço manual por card',
       rows: [
-        { k: 'S', count: '230 cards', time: '~2 dias cada' },
-        { k: 'M', count: '135 cards', time: '~5 dias cada' },
+        { k: 'S', count: '252 cards', time: '~2 dias cada' },
+        { k: 'M', count: '152 cards', time: '~5 dias cada' },
         { k: 'L', count: '10 cards',  time: '~12 dias cada' },
       ],
     },
-    { v: '1.250', l: 'Dev-dias manuais', sub: 'equivalente em esforço humano' },
+    { v: '1.384', l: 'Dev-dias manuais', sub: 'equivalente em esforço humano' },
     { v: '1 mês', l: 'Tempo real', sub: 'do primeiro card ao SGO v2' },
   ];
 
